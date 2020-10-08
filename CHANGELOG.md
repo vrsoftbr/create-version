@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.0.14
+
+- Updated README.md
+
+
 ## v1.0.13
 
 - Updated entrypoint
