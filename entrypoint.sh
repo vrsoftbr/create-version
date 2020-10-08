@@ -5,12 +5,15 @@ set -e
 echo "Current Folder"
 pwd
 ls
-
+git status
+git log
+git tag -l
 
 CHANGELOG="CHANGELOG.md"
 NEW_TAG="$1"
 
 echo "Getting last tag"
+
 LAST_TAG=$(git describe --abbrev=0)
 TEMP_FILE="/tmp/vr"
 
