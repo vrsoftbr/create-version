@@ -39,11 +39,11 @@ sh -c "git config --global user.name '${GITHUB_ACTOR}' \
       && git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'"
 
 
-git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+git remote -vv
 BRANCH=${GITHUB_REF##*/}
 echo "Changing to branch $BRANCH"
 git checkout $BRANCH
-git fetch $BRANCH
+git fetch origin $BRANCH
 git log --format="- %B" --no-merges && exit 0
 
 CHANGELOG="CHANGELOG.md"
