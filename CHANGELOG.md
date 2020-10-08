@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.0.18
+
+- Gradle testing
+
+
 ## v1.0.17
 
 - Updated README.md
