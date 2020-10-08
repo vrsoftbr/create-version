@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## v1.0.17
+
+- Updated README.md
+
+Removed new line from the end of the file
+
+- Updated README.md
+
+Added new line in the end of the file
+
+
 ## v1.0.16
 
 - Update README.md
