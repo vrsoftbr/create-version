@@ -44,7 +44,9 @@ BRANCH=${GITHUB_REF##*/}
 echo "Changing to branch $BRANCH"
 
 git fetch --all
-git log --format="- %B" --no-merges && exit 0
+git pull
+git log
+# git log --format="- %B" --no-merges && exit 0
 
 CHANGELOG="CHANGELOG.md"
 NEW_TAG="$1"
