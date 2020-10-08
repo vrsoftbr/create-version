@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v1.0.9
+
+- Teste geração changelog
+
+Gerando o changelog da versão 1.0.9
+
+
 ## v1.0.8
 
 - Testing chengelog
