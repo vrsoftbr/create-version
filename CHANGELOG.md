@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.0.12
+
+- Teste update version
+
+- Added build.sh
+
+Changed action to get the script that will increase version
+
+
 ## v1.0.11
 
 - Changed version.properties
