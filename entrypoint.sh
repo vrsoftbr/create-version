@@ -49,7 +49,8 @@ echo "Getting last tag"
 LAST_TAG=$(git describe --abbrev=0)
 
 echo "Getting messages log"
-git log --format="- %s" $LAST_TAG... --no-merges > $TEMP_FILE
+git log --format="- %B" $LAST_TAG... --no-merges > $TEMP_FILE
+cat $TEMP
 cd ..
 
 echo  "NEW_TAG - $NEW_TAG" 
@@ -65,6 +66,8 @@ fi
 echo "Updating changelog"
 sed -i "3s/^/## $NEW_TAG\n\n\n/" CHANGELOG.md
 sed -i "4r temp" CHANGELOG.md
+
+git status
 
 echo "Generating commit"
 git commit -a -m "Entrega da versão $NEW_TAG"
