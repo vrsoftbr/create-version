@@ -1,5 +1,12 @@
 #!/bin/bash -l
 
+ls -lha
+
+echo "$1"
+
+chmod +x ./gradlew
+./gradlew -q release
+
 set -e
 
 # Sets git username and email

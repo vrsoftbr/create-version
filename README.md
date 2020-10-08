@@ -1,4 +1,5 @@
 # Create Version Action
+
 ![Release](https://github.com/ricardosanfelice/create-version/workflows/Release/badge.svg)
 
 This action create/update the CHANGELOG.md file based on the last chages and makes a commit. Also it creates the tag for the last commits and push them all
