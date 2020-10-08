@@ -1,9 +1,14 @@
 #!/bin/sh -l
 
+set -e
+
 CHANGELOG="CHANGELOG.md"
 NEW_TAG="$1"
 LAST_TAG=$(git describe --abbrev=0)
 TEMP_FILE="/tmp/vr"
+
+sh -c "git config --global user.name '${GITHUB_ACTOR}' \
+      && git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'
 
 if [ ! -f "$CHANGELOG" ]; then
     touch "$CHANGELOG"
