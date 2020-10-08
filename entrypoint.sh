@@ -2,45 +2,42 @@
 
 set -e
 
-echo "Configuring GIT"
+# Sets git username and email
 sh -c "git config --global user.name '${GITHUB_ACTOR}' \
       && git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'"
 
 CHANGELOG="CHANGELOG.md"
 
+#Execute build script available through $1 parameter
 NEW_TAG=$(bash -c "$1")
-git status
-TEMP_FILE="/tmp/vr"
+#Temp file to store commit messages
+TEMP_FILE="/tmp/log"
+BARE="/tmp/bare"
 
-git clone --bare $(git remote get-url origin) bare_clone
-cd bare_clone
-echo "Getting last tag"
-LAST_TAG=$(git describe --abbrev=0)
+#Bare clone to get last tag and all the commits since that tag
+git clone --bare $(git remote get-url origin) $BARE
+#Getting tags and commit messages from bare repo
+LAST_TAG=$(git -C $BARE describe --abbrev=0)
+git -C $BARE log --format="- %B" $LAST_TAG... --no-merges > $TEMP_FILE
 
-echo "Getting messages log"
-git log --format="- %B" $LAST_TAG... --no-merges > $TEMP_FILE
-cd ..
-rm -rf bare_clone
-
+#Creates CHANGELOG.md file if it doesn't exists
 if [ ! -f "$CHANGELOG" ]; then
     echo "Creating CHANGELOG.md"
     touch "$CHANGELOG"
     echo -e "# CHANGELOG\n\n" > $CHANGELOG
 fi
 
-
-echo "Updating changelog"
+#Update changelog file with the new version and commit messages
 sed -i "3s/^/## $NEW_TAG\n\n\n/" CHANGELOG.md
 sed -i "4r $TEMP_FILE" CHANGELOG.md
 
-echo "Generating commit"
+#Add new and changed files and makes a commit
 git add .
 git commit -m "Entrega da versão $NEW_TAG"
 
-echo "Creating tag"
+#Create the new tag
 git tag -a $NEW_TAG -m "$(cat $TEMP_FILE)"
 
-rm $TEMP_FILE
-
+#Push recently created commit along with tags
 git push --follow-tags
 
