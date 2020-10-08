@@ -4,6 +4,8 @@ set -e
 
 echo "Environment"
 
+ls -la
+
 echo  "GITHUB_JOB - $GITHUB_JOB"
 echo  "GITHUB_REF - $GITHUB_REF"
 echo  "GITHUB_SHA - $GITHUB_SHA"
@@ -33,14 +35,18 @@ echo  "ACTIONS_RUNTIME_URL - $ACTIONS_RUNTIME_URL"
 echo  "ACTIONS_RUNTIME_TOKEN - $ACTIONS_RUNTIME_TOKEN"
 echo  "ACTIONS_CACHE_URL - $ACTIONS_CACHE_URL"
 
+sh -c "git config --global user.name '${GITHUB_ACTOR}' \
+      && git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'"
 
 BRANCH=${GITHUB_REF##*/}
 echo "Changing to branch $BRANCH"
 git checkout $BRANCH
-git log
+git log --format="- %s" $LAST_TAG... --no-merges
 
 CHANGELOG="CHANGELOG.md"
 NEW_TAG="$1"
+
+exit 0
 
 echo "Getting last tag"
 
@@ -52,8 +58,6 @@ echo  "LAST_TAG - $LAST_TAG"
 
 echo "Configuring GIT"
 
-sh -c "git config --global user.name '${GITHUB_ACTOR}' \
-      && git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'"
 
 if [ ! -f "$CHANGELOG" ]; then
     echo "Creating CHANGELOG.md"
