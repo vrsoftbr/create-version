@@ -16,4 +16,3 @@ uses: ricardosanfelice/create-version@v1
 with:
   script: './build.sh'
 ```
-
