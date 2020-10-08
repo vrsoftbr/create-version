@@ -50,8 +50,9 @@ LAST_TAG=$(git describe --abbrev=0)
 
 echo "Getting messages log"
 git log --format="- %B" $LAST_TAG... --no-merges > $TEMP_FILE
-cat $TEMP
+cat $TEMP_FILE
 cd ..
+rm -rf bare_clone
 
 echo  "NEW_TAG - $NEW_TAG" 
 echo  "LAST_TAG - $LAST_TAG" 
@@ -70,7 +71,8 @@ sed -i "4r temp" CHANGELOG.md
 git status
 
 echo "Generating commit"
-git commit -a -m "Entrega da versão $NEW_TAG"
+git add .
+git commit -m "Entrega da versão $NEW_TAG"
 
 echo "Creating tag"
 git tag -a $NEW_TAG -m "$(cat $TEMP_FILE)"
