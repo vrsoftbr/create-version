@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.0.16
+
+- Update README.md
+
 ## v1.0.15
 
 - Improvment of entrypoint script
