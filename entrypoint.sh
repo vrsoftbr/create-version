@@ -34,6 +34,11 @@ echo  "ACTIONS_RUNTIME_TOKEN - $ACTIONS_RUNTIME_TOKEN"
 echo  "ACTIONS_CACHE_URL - $ACTIONS_CACHE_URL"
 
 
+BRANCH=${GITHUB_REF##*/}
+echo "Changing to branch $BRANCH"
+git checkout $BRANCH
+git log
+
 CHANGELOG="CHANGELOG.md"
 NEW_TAG="$1"
 
@@ -41,6 +46,9 @@ echo "Getting last tag"
 
 LAST_TAG=$(git describe --abbrev=0)
 TEMP_FILE="/tmp/vr"
+
+echo  "NEW_TAG - $NEW_TAG" 
+echo  "LAST_TAG - $LAST_TAG" 
 
 echo "Configuring GIT"
 
