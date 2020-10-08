@@ -8,33 +8,7 @@ sh -c "git config --global user.name '${GITHUB_ACTOR}' \
 
 CHANGELOG="CHANGELOG.md"
 
-KEY="patch"
-FILE=".version"
-
-PATCH=$(sed -rn "s/^$KEY=([^\n]+)$/\1/p" $FILE)
-PATCH=$((($PATCH+1)))
-echo $PATCH
-
-echo "ATUALIZANDO VERSAO"
-sed -ri'' "s/^[#]*\s*${KEY}=.*/$KEY=$PATCH/" $FILE
-cat $FILE
-
-while IFS='=' read -r line
-do
-    line=$(echo $line | tr '.' '_')
-    line=$(echo $line | tr -s ' = ' '=')
-    line=$(echo $line | tr -d '\r')
-    if [ ! -z $line ]
-    then
-        declare $line
-    fi
-done <$FILE
-
-echo "VERSAO GERADO"
-echo "v${major}.${minor}.${patch}"
-
-
-NEW_TAG="v${major}.${minor}.${patch}"
+NEW_TAG=$1
 git status
 TEMP_FILE="/tmp/vr"
 

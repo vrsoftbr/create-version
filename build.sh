@@ -3,10 +3,10 @@
 KEY="patch"
 FILE=".version"
 
-PATCH=$(sed -rn "s/^$KEY=([^\n]+)$/\1/p" $FILE)
+PATCH=$(sed -rn "s~^$KEY=([^\n]+)$~\1~p" $FILE)
 PATCH=$((($PATCH+1)))
 
-sed -ri'' "s/^[#]*\s*${KEY}=.*/$KEY=$PATCH/" $FILE
+sed -ri'' "s~^[#]*\s*${KEY}=.*~$KEY=$PATCH~" $FILE
 
 while IFS='=' read -r line
 do
