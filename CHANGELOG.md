@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.0.19
+
+- Java
+
+
 ## v1.0.18
 
 - Gradle testing
