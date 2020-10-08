@@ -1,0 +1,15 @@
+# action.yml
+name: 'Create Version'
+description: 'Creates a tag version and adds chages to changelog'
+inputs:
+  version:  # id of input
+    description: 'Version number'
+    required: true
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.version }}
