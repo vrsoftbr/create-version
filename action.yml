@@ -2,8 +2,8 @@
 name: 'Create Version'
 description: 'Creates a tag version and adds chages to changelog'
 inputs:
-  version:  # id of input
-    description: 'Version number'
+  script:  # id of input
+    description: 'Script that will increase version number and update version file'
     required: true
 outputs:
   time: # id of output
@@ -12,4 +12,4 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.version }}
+    - ${{ inputs.script }}
