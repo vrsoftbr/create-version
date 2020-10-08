@@ -35,42 +35,31 @@ echo  "ACTIONS_RUNTIME_URL - $ACTIONS_RUNTIME_URL"
 echo  "ACTIONS_RUNTIME_TOKEN - $ACTIONS_RUNTIME_TOKEN"
 echo  "ACTIONS_CACHE_URL - $ACTIONS_CACHE_URL"
 
+echo "Configuring GIT"
 sh -c "git config --global user.name '${GITHUB_ACTOR}' \
       && git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'"
 
-
-git remote -vv
-BRANCH=${GITHUB_REF##*/}
-echo "Changing to branch $BRANCH"
-
-git fetch --all
-git pull
-git log
-# git log --format="- %B" --no-merges && exit 0
-
 CHANGELOG="CHANGELOG.md"
 NEW_TAG="$1"
-
-echo "Getting last tag"
-
-LAST_TAG=$(git describe --abbrev=0)
 TEMP_FILE="/tmp/vr"
+
+git clone --bare $(git remote get-url origin) bare_clone
+cd bare_clone
+echo "Getting last tag"
+LAST_TAG=$(git describe --abbrev=0)
+
+echo "Getting messages log"
+git log --format="- %s" $LAST_TAG... --no-merges > $TEMP_FILE
+cd ..
 
 echo  "NEW_TAG - $NEW_TAG" 
 echo  "LAST_TAG - $LAST_TAG" 
-
-echo "Configuring GIT"
-
 
 if [ ! -f "$CHANGELOG" ]; then
     echo "Creating CHANGELOG.md"
     touch "$CHANGELOG"
     echo -e "# CHANGELOG\n\n" > $CHANGELOG
 fi
-
-
-echo "Getting messages log"
-git log --format="- %s" $LAST_TAG... --no-merges > $TEMP_FILE
 
 
 echo "Updating changelog"
