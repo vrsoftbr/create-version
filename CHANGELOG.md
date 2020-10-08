@@ -2,6 +2,11 @@
 
 ## v1.0.6
 
+- Testing chengelog
+
+
+## v1.0.6
+
 
 ## v1.0.5
 
