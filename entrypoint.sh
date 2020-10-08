@@ -50,7 +50,6 @@ LAST_TAG=$(git describe --abbrev=0)
 
 echo "Getting messages log"
 git log --format="- %B" $LAST_TAG... --no-merges > $TEMP_FILE
-cat $TEMP_FILE
 cd ..
 rm -rf bare_clone
 
