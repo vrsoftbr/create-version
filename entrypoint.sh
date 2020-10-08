@@ -20,8 +20,12 @@ BARE="/tmp/bare"
 #Bare clone to get last tag and all the commits since that tag
 git clone --bare $(git remote get-url origin) $BARE
 #Getting tags and commit messages from bare repo
-LAST_TAG=$(git -C $BARE describe --abbrev=0)
-git -C $BARE log --format="- %B" $LAST_TAG... --no-merges > $TEMP_FILE
+LAST_TAG=$(git -C $BARE describe --abbrev=0 || echo "-1")
+if [ $LAST_TAG -eq "-1" ]; then
+    git -C $BARE log --format="- %B" --no-merges > $TEMP_FILE
+else
+    git -C $BARE log --format="- %B" $LAST_TAG... --no-merges > $TEMP_FILE
+fi
 
 #Creates CHANGELOG.md file if it doesn't exists
 if [ ! -f "$CHANGELOG" ]; then
