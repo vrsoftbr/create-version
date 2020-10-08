@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## v1.0.11
+
+- Changed version.properties
+
+Increased patch number to 11
+
+- Added version.proerties
+
+Added file to control current version
+
+
 ## v1.0.9
 
 - Teste geração changelog
