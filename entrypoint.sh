@@ -38,6 +38,8 @@ echo  "ACTIONS_CACHE_URL - $ACTIONS_CACHE_URL"
 sh -c "git config --global user.name '${GITHUB_ACTOR}' \
       && git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'"
 
+
+git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
 BRANCH=${GITHUB_REF##*/}
 echo "Changing to branch $BRANCH"
 git checkout $BRANCH
