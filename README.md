@@ -11,6 +11,8 @@ Esta ação imprime "Hello World" ou "Hello" + o nome de uma pessoa a ser cumpri
 
 ## Example of usage
 
+```yaml
 uses: ricardosanfelice/create-version@v1
 with:
   version: 'v1.2.3'
+```
