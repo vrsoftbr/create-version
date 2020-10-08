@@ -65,7 +65,7 @@ fi
 
 echo "Updating changelog"
 sed -i "3s/^/## $NEW_TAG\n\n\n/" CHANGELOG.md
-sed -i "4r temp" CHANGELOG.md
+sed -i "4r $TEMP_FILE" CHANGELOG.md
 
 git status
 
