@@ -8,7 +8,7 @@ sh -c "git config --global user.name '${GITHUB_ACTOR}' \
 
 CHANGELOG="CHANGELOG.md"
 
-NEW_TAG=$1
+NEW_TAG=$(bash -c "$1")
 git status
 TEMP_FILE="/tmp/vr"
 
