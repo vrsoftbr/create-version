@@ -2,14 +2,17 @@
 
 set -e
 
-CHANGELOG="CHANGELOG.md"
-NEW_TAG="$1"
-LAST_TAG=$(git describe --abbrev=0)
-TEMP_FILE="/tmp/vr"
-
 echo "Current Folder"
 pwd
 ls
+
+
+CHANGELOG="CHANGELOG.md"
+NEW_TAG="$1"
+
+echo "Getting last tag"
+LAST_TAG=$(git describe --abbrev=0)
+TEMP_FILE="/tmp/vr"
 
 echo "Configuring GIT"
 
