@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.0.21
+
+- Updating changelog generation
+
+
 ## v1.0.20
 
 - Java
