@@ -1,13 +1,10 @@
 #!/bin/bash -l
 
-ls -lha
-
-echo "$1"
-
-chmod +x ./gradlew
-./gradlew -q release
-
 set -e
+
+which java
+
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 
 # Sets git username and email
 sh -c "git config --global user.name '${GITHUB_ACTOR}' \
