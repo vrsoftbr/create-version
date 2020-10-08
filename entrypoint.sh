@@ -41,7 +41,7 @@ sh -c "git config --global user.name '${GITHUB_ACTOR}' \
 BRANCH=${GITHUB_REF##*/}
 echo "Changing to branch $BRANCH"
 git checkout $BRANCH
-git log --format="- %s" $LAST_TAG... --no-merges
+git log --format="- %s" --no-merges
 
 CHANGELOG="CHANGELOG.md"
 NEW_TAG="$1"
