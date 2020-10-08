@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v1.0.13
+
+- Updated entrypoint
+
+- Updated build.sh
+
+
 ## v1.0.12
 
 - Teste update version
