@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## v1.1.1
+
+
 ## v1.0.21
 
 - Updating changelog generation
