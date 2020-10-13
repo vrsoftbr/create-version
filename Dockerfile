@@ -1,7 +1,7 @@
 # Imagem de contêiner que executa seu código
 FROM alpine:3.10
 
-RUN apk add --no-cache git bash openjdk11
+RUN apk add --no-cache git bash
 
 # Copia o arquivo de código do repositório de ação para o caminho do sistema de arquivos `/` do contêiner
 COPY entrypoint.sh /entrypoint.sh
