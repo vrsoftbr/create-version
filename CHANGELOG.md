@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.0.22
+
+- Removing java settings
+
+
 ## v1.0.21
 
 - Updating changelog generation
