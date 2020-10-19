@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.0.26
+
+- Fixed version checking
+
+
 ## v1.0.25
 
 - Fixing tag generation
