@@ -11,6 +11,8 @@ CHANGELOG="CHANGELOG.md"
 #Execute build script available through $1 parameter
 NEW_TAG=$(bash -c "$1")
 
+echo "NEW TAG $NEW_TAG"
+
 #Temp file to store commit messages
 TEMP_FILE="/tmp/log"
 BARE="/tmp/bare"
@@ -19,7 +21,7 @@ BARE="/tmp/bare"
 git clone --bare $(git remote get-url origin) $BARE
 #Getting tags and commit messages from bare repo
 LAST_TAG="$(git -C $BARE describe --abbrev=0 || echo "-1")"
-if [ "$LAST_TAG" -eq "-1" ]; then
+if [ "$LAST_TAG" == "-1" ]; then
     git -C $BARE log --format="- %B" --no-merges > $TEMP_FILE
 else
     git -C $BARE log --format="- %B" $LAST_TAG... --no-merges > $TEMP_FILE
@@ -47,6 +49,7 @@ git push
 COMMIT=$(git log --format="%H" -n 1)
 
 TAG_MESSAGE="$(cat $TEMP_FILE)"
+echo "$TAG_MESSAGE"
 OUT=$(curl \
   -X POST \
   -H 'authorization: Bearer '"$TOKEN" \
@@ -54,11 +57,7 @@ OUT=$(curl \
   https://api.github.com/repos/$GITHUB_REPOSITORY/git/tags \
   -d '{"tag":"'"$NEW_TAG"'","message":"'"${TAG_MESSAGE//$'\n'/'\n'}"'","object":"'"$COMMIT"'","type":"commit"}')
 
-echo "$OUT"
-
 TAG_SHA=$(echo $OUT | python3 -c "import sys, json; print(json.load(sys.stdin)['sha'])")
-
-echo "$TAG_SHA"
 
 curl \
   -X POST \
