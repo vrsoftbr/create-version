@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.0.23
+
+- Creating tag through API
+
+
 ## v1.0.22
 
 - Removing java settings
