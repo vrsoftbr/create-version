@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.0.25
+
+- Fixing tag generation
+
+
 ## v1.0.24
 
 - Added CURL to Dockerfile
