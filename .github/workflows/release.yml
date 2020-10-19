@@ -12,4 +12,6 @@ jobs:
       uses: ./
       with:
         script: './build.sh'
+      env:
+        TOKEN: ${{ secrets.TOKEN }}
         

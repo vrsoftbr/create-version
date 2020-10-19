@@ -1,13 +1,10 @@
 # action.yml
 name: 'Create Version'
-description: 'Creates a tag version and adds chages to changelog'
+description: 'Creates a tag version and adds changes to changelog'
 inputs:
-  script:  # id of input
+  script:  
     description: 'Script that will increase version number and update version file'
-    required: true
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+    required: true 
 runs:
   using: 'docker'
   image: 'Dockerfile'

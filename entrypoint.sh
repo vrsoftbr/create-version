@@ -10,6 +10,7 @@ CHANGELOG="CHANGELOG.md"
 
 #Execute build script available through $1 parameter
 NEW_TAG=$(bash -c "$1")
+
 #Temp file to store commit messages
 TEMP_FILE="/tmp/log"
 BARE="/tmp/bare"
@@ -17,7 +18,7 @@ BARE="/tmp/bare"
 #Bare clone to get last tag and all the commits since that tag
 git clone --bare $(git remote get-url origin) $BARE
 #Getting tags and commit messages from bare repo
-LAST_TAG=$(git -C $BARE describe --abbrev=0 || echo "-1")
+LAST_TAG="$(git -C $BARE describe --abbrev=0 || echo "-1")"
 if [ "$LAST_TAG" -eq "-1" ]; then
     git -C $BARE log --format="- %B" --no-merges > $TEMP_FILE
 else
@@ -28,6 +29,7 @@ fi
 if [ ! -f "$CHANGELOG" ]; then
     echo "Creating CHANGELOG.md"
     touch "$CHANGELOG"
+
     echo -e "# CHANGELOG\n\n" > $CHANGELOG
 fi
 
@@ -39,9 +41,27 @@ sed -i "4r $TEMP_FILE" CHANGELOG.md
 git add .
 git commit -m "Entrega da versão $NEW_TAG"
 
-#Create the new tag
-git tag -a $NEW_TAG -m "$(cat $TEMP_FILE)"
-
 #Push recently created commit along with tags
-git push --follow-tags
+git push
+
+COMMIT=$(git log --format="%H" -n 1)
+
+
+OUT=curl \
+   --header 'authorization: Bearer '"$TOKEN"'' \
+  -X POST \
+  -H "Accept: application/vnd.github.v3+json" \
+  https://api.github.com/repos/$GITHUB_REPOSITORY/git/tags \
+  -d '{"tag":"'"$NEW_TAG"'","message":"'"$(cat $TEMP_FILE)"'","object":"'"$COMMIT"'","type":"commit"}'
+
+echo "$OUT"
+
+TAG_SHA=$(echo $OUT | python3 -c "import sys, json; print(json.load(sys.stdin)['name'])")
+
+curl \
+  --header 'authorization: Bearer '"$TOKEN"'' \
+  -X POST \
+  -H "Accept: application/vnd.github.v3+json" \
+  https://api.github.com/repos/$GITHUB_REPOSITORY/git/refs \
+  -d '{"ref":"refs/tags/'"$NEW_TAG"'","sha":"'"${TAG_SHA}"'"}'
 

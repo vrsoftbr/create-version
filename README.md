@@ -16,4 +16,6 @@ This action create/update the CHANGELOG.md file based on the last chages and mak
 uses: ricardosanfelice/create-version@v1
 with:
   script: './build.sh'
+env:
+  TOKEN: $GITHUB_TOKEN
 ```
