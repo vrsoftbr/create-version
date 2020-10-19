@@ -46,21 +46,23 @@ git push
 
 COMMIT=$(git log --format="%H" -n 1)
 
-
+TAG_MESSAGE="$(cat $TEMP_FILE)"
 OUT=$(curl \
   -X POST \
-  -H 'authorization: Bearer '"$TOKEN"'' \
+  -H 'authorization: Bearer '"$TOKEN" \
   -H "Accept: application/vnd.github.v3+json" \
   https://api.github.com/repos/$GITHUB_REPOSITORY/git/tags \
-  -d '{"tag":"'"$NEW_TAG"'","message":"'"$(cat $TEMP_FILE)"'","object":"'"$COMMIT"'","type":"commit"}')
+  -d '{"tag":"'"$NEW_TAG"'","message":"'"${TAG_MESSAGE//$'\n'/'\n'}"'","object":"'"$COMMIT"'","type":"commit"}')
 
 echo "$OUT"
 
-TAG_SHA=$(echo $OUT | python3 -c "import sys, json; print(json.load(sys.stdin)['name'])")
+TAG_SHA=$(echo $OUT | python3 -c "import sys, json; print(json.load(sys.stdin)['sha'])")
+
+echo "$TAG_SHA"
 
 curl \
   -X POST \
-  -H 'authorization: Bearer '"$TOKEN"'' \
+  -H 'authorization: Bearer '"$TOKEN" \
   -H "Accept: application/vnd.github.v3+json" \
   https://api.github.com/repos/$GITHUB_REPOSITORY/git/refs \
   -d '{"ref":"refs/tags/'"$NEW_TAG"'","sha":"'"${TAG_SHA}"'"}'
