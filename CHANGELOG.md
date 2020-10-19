@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.0.24
+
+- Added CURL to Dockerfile
+
+- Entrega da versão v1.0.23
+
+- Creating tag through API
+
+
 ## v1.0.23
 
 - Creating tag through API
