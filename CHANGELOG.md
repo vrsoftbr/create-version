@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.0.27
+
+- Fixed workflow to run only on push to branches
+
+
 ## v1.0.26
 
 - Fixed version checking
