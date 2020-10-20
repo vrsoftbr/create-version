@@ -1,6 +1,6 @@
 #!/bin/bash -l
 
-set -euxo pipefail
+#set -euxo pipefail
 
 # Sets git username and email
 sh -c "git config --global user.name '${GITHUB_ACTOR}' \
