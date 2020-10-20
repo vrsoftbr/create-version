@@ -1,16 +1,15 @@
 #!/bin/bash -l
 
-#set -euxo pipefail
+set -euxo pipefail
+
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
+JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 
 # Sets git username and email
 sh -c "git config --global user.name '${GITHUB_ACTOR}' \
       && git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'"
 
 CHANGELOG="CHANGELOG.md"
-
-ls -lha
-
-echo "$1"
 
 #Execute build script available through $1 parameter
 NEW_TAG=$(bash -c "$1")

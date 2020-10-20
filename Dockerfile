@@ -6,6 +6,7 @@ LABEL "com.github.actions.icon"="check-square"
 LABEL "com.github.actions.color"="yellow"
 
 RUN apk add --no-cache \
+    openjdk11 \
     git \
     bash \
     curl \
@@ -13,4 +14,4 @@ RUN apk add --no-cache \
 
 COPY entrypoint.sh /entrypoint.sh
 
-CMD ["sh", "entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
