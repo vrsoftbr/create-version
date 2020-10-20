@@ -11,7 +11,7 @@ CHANGELOG="CHANGELOG.md"
 #Execute build script available through $1 parameter
 NEW_TAG=$(bash -c "$1")
 
-echo "NEW TAG $NEW_TAG"
+sh -c "echo NEW TAG $NEW_TAG"
 
 #Temp file to store commit messages
 TEMP_FILE="/tmp/log"
@@ -29,7 +29,7 @@ fi
 
 #Creates CHANGELOG.md file if it doesn't exists
 if [ ! -f "$CHANGELOG" ]; then
-    echo "Creating CHANGELOG.md"
+    sh -c  "echo Creating CHANGELOG.md"
     touch "$CHANGELOG"
 
     echo -e "# CHANGELOG\n\n" > $CHANGELOG
@@ -49,7 +49,7 @@ git push
 COMMIT=$(git log --format="%H" -n 1)
 
 TAG_MESSAGE="$(cat $TEMP_FILE)"
-echo "$TAG_MESSAGE"
+sh -c  "echo TAG MESSAGE $TAG_MESSAGE"
 OUT=$(curl \
   -X POST \
   -H 'authorization: Bearer '"$TOKEN" \
