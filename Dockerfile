@@ -1,10 +1,16 @@
-# Imagem de contêiner que executa seu código
 FROM alpine:3.10
 
-RUN apk add --no-cache git bash curl python3
+LABEL "com.github.actions.name"="create-version"
+LABEL "com.github.actions.description"="Create version commit and tag"
+LABEL "com.github.actions.icon"="check-square"
+LABEL "com.github.actions.color"="yellow"
 
-# Copia o arquivo de código do repositório de ação para o caminho do sistema de arquivos `/` do contêiner
+RUN apk add --no-cache \
+    git \
+    bash \
+    curl \
+    python3
+
 COPY entrypoint.sh /entrypoint.sh
 
-# Arquivo de código a ser executado quando o contêiner do docker é iniciado (`entrypoint.sh`)
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ["sh", "entrypoint.sh"]
