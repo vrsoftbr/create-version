@@ -21,7 +21,11 @@ TEMP_FILE="/tmp/log"
 BARE="/tmp/bare"
 
 #Bare clone to get last tag and all the commits since that tag
-git clone --bare $(git remote get-url origin) $BARE
+URL="http://$GITHUB_ACTOR:$TOKEN@github.com/$GITHUB_REPOSITORY"
+
+echo "$URL"
+
+git clone --bare $URL $BARE
 #Getting tags and commit messages from bare repo
 LAST_TAG="$(git -C $BARE describe --abbrev=0 || echo "-1")"
 if [ "$LAST_TAG" == "-1" ]; then
