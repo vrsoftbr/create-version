@@ -6,8 +6,8 @@ export JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 
 # Sets git username and email
-sh -c "git config --global user.name '${GITHUB_ACTOR}' \
-      && git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'"
+sh -c "git config --global user.name '${USER}' \
+      && git config --global user.email '${USER}@users.noreply.github.com'"
 
 CHANGELOG="CHANGELOG.md"
 
@@ -21,7 +21,7 @@ TEMP_FILE="/tmp/log"
 BARE="/tmp/bare"
 
 #Bare clone to get last tag and all the commits since that tag
-URL="http://$USER:$TOKEN@github.com/$GITHUB_REPOSITORY"
+URL="https://$USER:$TOKEN@github.com/$GITHUB_REPOSITORY"
 
 echo "$URL"
 
@@ -45,6 +45,8 @@ fi
 #Update changelog file with the new version and commit messages
 sed -i "3s/^/## $NEW_TAG\n\n\n/" CHANGELOG.md
 sed -i "4r $TEMP_FILE" CHANGELOG.md
+
+git remote set-url origin $URL
 
 #Add new and changed files and makes a commit
 git add .
