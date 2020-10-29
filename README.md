@@ -17,5 +17,6 @@ uses: ricardosanfelice/create-version@v1
 with:
   script: './build.sh'
 env:
+  USER: $GITHUB_ACTOR
   TOKEN: $GITHUB_TOKEN
 ```

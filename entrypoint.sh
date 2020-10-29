@@ -21,7 +21,7 @@ TEMP_FILE="/tmp/log"
 BARE="/tmp/bare"
 
 #Bare clone to get last tag and all the commits since that tag
-URL="http://$GITHUB_ACTOR:$TOKEN@github.com/$GITHUB_REPOSITORY"
+URL="http://$USER:$TOKEN@github.com/$GITHUB_REPOSITORY"
 
 echo "$URL"
 

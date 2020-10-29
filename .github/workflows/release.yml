@@ -15,4 +15,5 @@ jobs:
         script: './build.sh'
       env:
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        USER: ${{ github.actor }}
         
