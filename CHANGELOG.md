@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.1.12
+
+- Commiting from cloned repository
+
+
 ## v1.1.11
 
 - Fixed git clone bare e git push
