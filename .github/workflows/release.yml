@@ -16,5 +16,4 @@ jobs:
       env:
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
         USER: ${{ github.actor }}
-        EMAIL: '${{ github.actor }}@users.noreply.github.com'
         

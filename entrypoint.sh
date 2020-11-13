@@ -7,7 +7,7 @@ JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 
 # Sets git username and email
 sh -c "git config --global user.name '${USER}' \
-      && git config --global user.email '${EMAIL}'"
+      && git config --global user.email '${USER}@users.noreply.github.com'"
 
 CHANGELOG="CHANGELOG.md"
 
@@ -46,13 +46,17 @@ fi
 sed -i "3s/^/## $NEW_TAG\n\n\n/" CHANGELOG.md
 sed -i "4r $TEMP_FILE" CHANGELOG.md
 
-git remote set-url origin $URL
+#git remote set-url origin $URL
 
 #Add new and changed files and makes a commit
 git add .
 git commit -m "Entrega da versão $NEW_TAG"
 
-#Push recently created commit along with tags
+COMMIT=$(git log --format="%H" -n 1)
+
+git show --pretty=fuller $COMMIT
+
+#Push recently created commit
 git push
 
 COMMIT=$(git log --format="%H" -n 1)
