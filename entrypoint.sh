@@ -26,7 +26,8 @@ URL="https://$USER:$TOKEN@github.com/$GITHUB_REPOSITORY"
 
 echo "$URL"
 
-git clone --bare $URL  -b $BRANCH $BARE
+git clone $URL -b $BRANCH $BARE
+cd $BARE
 #Getting tags and commit messages from bare repo
 LAST_TAG="$(git -C $BARE describe --abbrev=0 || echo "-1")"
 if [ "$LAST_TAG" == "-1" ]; then
