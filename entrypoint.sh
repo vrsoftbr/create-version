@@ -7,7 +7,7 @@ JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 
 # Sets git username and email
 sh -c "git config --global user.name '${USER}' \
-      && git config --global user.email '${USER}@users.noreply.github.com'"
+      && git config --global user.email '${EMAIL}'"
 
 CHANGELOG="CHANGELOG.md"
 
