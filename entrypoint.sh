@@ -4,6 +4,7 @@ set -euxo pipefail
 
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
+BRANCH="${GITHUB_REF##*/}"
 
 # Sets git username and email
 sh -c "git config --global user.name '${USER}' \
@@ -25,7 +26,7 @@ URL="https://$USER:$TOKEN@github.com/$GITHUB_REPOSITORY"
 
 echo "$URL"
 
-git clone --bare $URL $BARE
+git clone --bare $URL  -b $BRANCH $BARE
 #Getting tags and commit messages from bare repo
 LAST_TAG="$(git -C $BARE describe --abbrev=0 || echo "-1")"
 if [ "$LAST_TAG" == "-1" ]; then
@@ -57,7 +58,7 @@ COMMIT=$(git log --format="%H" -n 1)
 git show --pretty=fuller $COMMIT
 
 #Push recently created commit
-git push
+git push origin $BRANCH
 
 COMMIT=$(git log --format="%H" -n 1)
 
