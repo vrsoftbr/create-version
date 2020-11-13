@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.1.11
+
+- Fixed git clone bare e git push
+
+
 ## v1.1.10
 
 
