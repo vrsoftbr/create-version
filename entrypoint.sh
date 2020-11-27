@@ -4,37 +4,42 @@ set -euxo pipefail
 
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
-BRANCH="${GITHUB_REF##*/}"
+#BRANCH="${GITHUB_REF##*/}"
+BRANCH=$(git branch --show-current)
 
 # Sets git username and email
-sh -c "git config --global user.name '${USER}' \
-      && git config --global user.email '${USER}@users.noreply.github.com'"
+sh -c "git config --global user.name '${GITHUB_ACTOR}' \
+      && git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'"
 
 CHANGELOG="CHANGELOG.md"
 
 #Execute build script available through $1 parameter
-NEW_TAG=$(bash -c "$1")
+NEW_TAG=$(bash -c "$SCRIPT")
 
 echo "NEW TAG $NEW_TAG"
 
-#Temp file to store commit messages
-TEMP_FILE="/tmp/log"
-BARE="/tmp/bare"
+#Getting tags and commit messages from repo
+LAST_TAG="$(git describe --abbrev=0 || echo "-1")"
+echo "Last generated tag -> $LAST_TAG"
 
-#Bare clone to get last tag and all the commits since that tag
-URL="https://$USER:$TOKEN@github.com/$GITHUB_REPOSITORY"
+COMMIT_COUNT=0
 
-echo "$URL"
-
-git clone $URL -b $BRANCH $BARE
-cd $BARE
-#Getting tags and commit messages from bare repo
-LAST_TAG="$(git -C $BARE describe --abbrev=0 || echo "-1")"
 if [ "$LAST_TAG" == "-1" ]; then
-    git -C $BARE log --format="- %B" --no-merges > $TEMP_FILE
+    COMMIT_COUNT=1
+    git log --format="- %B" --no-merges > $TEMP_FILE
 else
-    git -C $BARE log --format="- %B" $LAST_TAG... --no-merges > $TEMP_FILE
+    COMMIT_COUNT=$(git rev-list $LAST_TAG..HEAD --count)
+    git log --format="- %B" $LAST_TAG... --no-merges > $TEMP_FILE
 fi
+
+
+if [ $COMMIT_COUNT -gt 0 ]; then
+  echo "Branch $BRANCH have $COMMIT_COUNT new commits"
+else 
+  echo "Branch $BRANCH don't have new commits"
+  exit 0
+fi
+
 
 #Creates CHANGELOG.md file if it doesn't exists
 if [ ! -f "$CHANGELOG" ]; then
@@ -48,11 +53,12 @@ fi
 sed -i "3s/^/## $NEW_TAG\n\n\n/" CHANGELOG.md
 sed -i "4r $TEMP_FILE" CHANGELOG.md
 
-#git remote set-url origin $URL
+#Add changed files and/or untrancked ones and make the commit
+COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | sed "s/:new_version/$NEW_TAG/")
+COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | sed "s/:last_version/$LAST_TAG/")
 
-#Add new and changed files and makes a commit
-git add .
-git commit -m "Entrega da versão $NEW_TAG"
+
+git commit -au -m $COMMIT_MESSAGE
 
 COMMIT=$(git log --format="%H" -n 1)
 
