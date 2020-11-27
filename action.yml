@@ -8,9 +8,13 @@ inputs:
   commit_message:  
     description: 'Message used in the commit'
     required: true
+  token:  
+    description: 'Token used to consume github api'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
   env:
     SCRIPT: ${{ inputs.script }}
     COMMIT_MESSAGE: ${{ inputs.commit_message }}
+    TOKEN: ${{ inputs.token }}

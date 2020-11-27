@@ -17,8 +17,7 @@ jobs:
       with:
         script: './build.sh'
         commit_message: 'New Version: :new_version'
-      env:
-        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         
         
 
