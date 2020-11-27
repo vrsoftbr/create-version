@@ -5,6 +5,9 @@ inputs:
   script:  
     description: 'Script that will increase version number and update version file'
     required: true 
+  commit_message:  
+    description: 'Message used in the commit'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
