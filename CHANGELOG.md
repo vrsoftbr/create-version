@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## v2.0.1
+
+- Fixed commit message
+
+- Bugfix
+
+- Changed fetch-depth from 10 to 0 to be able to list tags
+- Added missing variable TEMP_FILE to entrypoint.sh
+
+- Fixed action.yml
+
+- Fixing worflow checkout token
+
+- Major fixes
+
+- Added commit count verification
+- Added new option: COMMIT_MESSAGE
+- Added wildcard for commit message: :new_version and :last_version
+- Removed useless bare clone. Right usage is to setup fetch-depth in actions/checkout@v2
+
+
 ## v1.1.12
 
 - Commiting from cloned repository
