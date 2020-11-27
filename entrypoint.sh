@@ -60,7 +60,7 @@ COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | sed "s/:new_version/$NEW_TAG/")
 COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | sed "s/:last_version/$LAST_TAG/")
 
 
-git commit -au -m $COMMIT_MESSAGE
+git commit -au -m "$COMMIT_MESSAGE"
 
 COMMIT=$(git log --format="%H" -n 1)
 
