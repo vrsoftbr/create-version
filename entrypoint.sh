@@ -4,18 +4,20 @@ set -euxo pipefail
 
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
-#BRANCH="${GITHUB_REF##*/}"
+
 BRANCH=$(git branch --show-current)
+CHANGELOG="CHANGELOG.md"
+TEMP_FILE="/tmp/log"
 
 # Sets git username and email
 sh -c "git config --global user.name '${GITHUB_ACTOR}' \
       && git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'"
 
-CHANGELOG="CHANGELOG.md"
 
 #Execute build script available through $1 parameter
 NEW_TAG=$(bash -c "$SCRIPT")
 
+#Temp file to store commit messages
 echo "NEW TAG $NEW_TAG"
 
 #Getting tags and commit messages from repo

@@ -4,7 +4,7 @@
 
 This action create/update the CHANGELOG.md file based on the last chages, commit changes and creates a tag. It must be used along with GitHub Action [`actions/checkout@v2`](https://github.com/actions/checkout)
 
-# Usage
+## Usage
 
 ```yaml
 - uses: actions/checkout@v2
