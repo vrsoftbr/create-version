@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v2.0.2
+
+- Added token setting
+
+
 ## v2.0.1
 
 - Fixed commit message
