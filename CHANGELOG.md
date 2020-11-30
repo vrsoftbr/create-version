@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v2.0.3
+
+- Added escaping to " char when to be ablew to create api json to generate tag
+
+
 ## v2.0.2
 
 - Added token setting
