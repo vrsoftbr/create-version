@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v2.0.4
+
+- Fixed replace to search for all ocurrences of "
+
+
 ## v2.0.3
 
 - Added escaping to " char when to be ablew to create api json to generate tag
