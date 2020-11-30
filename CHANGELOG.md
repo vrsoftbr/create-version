@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v2.0.5
+
+- Removing m modifier from sed
+
+- New Version: v2.0.4
+
+- Fixed replace to search for all ocurrences of "
+
+
 ## v2.0.4
 
 - Fixed replace to search for all ocurrences of "
