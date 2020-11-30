@@ -71,7 +71,7 @@ git push origin $BRANCH
 
 COMMIT=$(git log --format="%H" -n 1)
 
-TAG_MESSAGE="$(cat $TEMP_FILE)"
+TAG_MESSAGE="$(cat $TEMP_FILE | sed 's/\"/\\\"/')"
 echo "TAG MESSAGE $TAG_MESSAGE"
 OUT=$(curl \
   -X POST \
