@@ -46,7 +46,7 @@ fi
 #Creates CHANGELOG.md file if it doesn't exists
 if [ ! -f "$CHANGELOG" ]; then
     echo "Creating CHANGELOG.md"
-    touch "$CHANGELOG"
+    touch "$CHANGELOG" && git add $CHANGELOG
 
     echo -e "# CHANGELOG\n\n" > $CHANGELOG
 fi
@@ -60,7 +60,7 @@ COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | sed "s/:new_version/$NEW_TAG/")
 COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | sed "s/:last_version/$LAST_TAG/")
 
 
-git commit -au -m "$COMMIT_MESSAGE"
+git commit -a -m "$COMMIT_MESSAGE"
 
 COMMIT=$(git log --format="%H" -n 1)
 
