@@ -72,8 +72,6 @@ git push origin $BRANCH
 COMMIT=$(git log --format="%H" -n 1)
 
 TAG_MESSAGE="$(cat $TEMP_FILE | sed 's/\"/\\\"/g')"
-TAG_MESSAGE="$(echo $TAG_MESSAGE | sed 's/</\\\\</g')"
-TAG_MESSAGE="$(echo $TAG_MESSAGE | sed 's/>/\\\\>/g')"
 
 echo "TAG MESSAGE $TAG_MESSAGE"
 OUT=$(curl \
@@ -81,7 +79,7 @@ OUT=$(curl \
   -H 'authorization: Bearer '"$TOKEN" \
   -H "Accept: application/vnd.github.v3+json" \
   https://api.github.com/repos/$GITHUB_REPOSITORY/git/tags \
-  -d '{"tag":"'"$NEW_TAG"'","message":"'"${TAG_MESSAGE//$'\n'/'\n'}"'","object":"'"$COMMIT"'","type":"commit"}')
+  --data-raw '{"tag":"'"$NEW_TAG"'","message":"'"${TAG_MESSAGE//$'\n'/'\n'}"'","object":"'"$COMMIT"'","type":"commit"}')
 
 TAG_SHA=$(echo $OUT | python3 -c "import sys, json; print(json.load(sys.stdin)['sha'])")
 
