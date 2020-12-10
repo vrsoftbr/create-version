@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v2.0.10
+
+- Added escaping char to < and >
+
+
 ## v2.0.9
 
 - Added --data-urlencode to curl
