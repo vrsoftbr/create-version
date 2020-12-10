@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v2.0.8
+
+- Added escaping char to < and >
+
+- New Version: v2.0.7
+
+- Added escaping char to < and >
+
+
 ## v2.0.7
 
 - Added escaping char to < and >
