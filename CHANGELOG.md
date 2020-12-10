@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v2.0.7
+
+- Added escaping char to < and >
+
+
 ## v2.0.6
 
 - Fixed to git add CHANGELOG when it is created for the first time
