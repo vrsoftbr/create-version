@@ -76,7 +76,7 @@ TAG_MESSAGE="$(echo $TAG_MESSAGE | sed 's/</\\</g')"
 TAG_MESSAGE="$(echo $TAG_MESSAGE | sed 's/>/\\>/g')"
 
 echo "TAG MESSAGE $TAG_MESSAGE"
-OUT=$(curl \
+OUT=$(curl --data-urlencode \
   -X POST \
   -H 'authorization: Bearer '"$TOKEN" \
   -H "Accept: application/vnd.github.v3+json" \
