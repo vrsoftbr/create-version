@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v2.0.11
+
+- Using --data-raw option to post commit messages
+
+
 ## v2.0.10
 
 - Added escaping char to < and >
