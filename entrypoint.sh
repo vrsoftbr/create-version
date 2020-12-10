@@ -72,11 +72,11 @@ git push origin $BRANCH
 COMMIT=$(git log --format="%H" -n 1)
 
 TAG_MESSAGE="$(cat $TEMP_FILE | sed 's/\"/\\\"/g')"
-TAG_MESSAGE="$(echo $TAG_MESSAGE | sed 's/</\\</g')"
-TAG_MESSAGE="$(echo $TAG_MESSAGE | sed 's/>/\\>/g')"
+TAG_MESSAGE="$(echo $TAG_MESSAGE | sed 's/</\\\\</g')"
+TAG_MESSAGE="$(echo $TAG_MESSAGE | sed 's/>/\\\\>/g')"
 
 echo "TAG MESSAGE $TAG_MESSAGE"
-OUT=$(curl --data-urlencode \
+OUT=$(curl \
   -X POST \
   -H 'authorization: Bearer '"$TOKEN" \
   -H "Accept: application/vnd.github.v3+json" \
