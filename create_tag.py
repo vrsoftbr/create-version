@@ -37,6 +37,7 @@ def create_tag(tag, commit):
         "object": commit,
         "type": "commit"
     }
+    print(payload)
     r = requests.post(url, json=payload, headers=headers)
     print(r.json())
     return r.json()['sha']
