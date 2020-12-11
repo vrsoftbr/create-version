@@ -29,7 +29,7 @@ def create_tag(tag, commit):
     url = "https://api.github.com/repos/" + repo + "/git/tags"
     commit_messages = ''
     with open(os.getenv('TEMP_FILE'), 'r') as file:
-        commit_messages = file.read()
+        commit_messages = file.read().replace("\"", "\\\"")
 
     payload = {
         "tag": tag,

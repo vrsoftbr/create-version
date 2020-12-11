@@ -67,8 +67,6 @@ COMMIT=$(git log --format="%H" -n 1)
 #Push recently created commit
 git push origin $BRANCH
 
-cat $TEMP_FILE | sed 's/\"/\\\"/g' > $TEMP_FILE
-
 pip3 install requests
  
 python3 create_tag.py -t $NEW_TAG -c $COMMIT
