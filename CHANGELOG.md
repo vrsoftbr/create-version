@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v2.1.
+
+- Moved api access to a python script
+
+
 ## v2.0.11
 
 - Using --data-raw option to post commit messages
