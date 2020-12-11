@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## v2.1.1
+
+- Fixed version file.
+
+- New Version: v2.1.
+
+- Added to print payload
+
+- New Version: v2.1.
+
+- Added print to r.json to show output
+
+- New Version: v2.1.
+
+- Fixed usage of pip3 in entrypoint
+
+- New Version: v2.1.
+
+- Moved api access to a python script
+
+
 ## v2.1.
 
 - Added to print payload
