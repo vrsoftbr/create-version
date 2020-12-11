@@ -38,6 +38,7 @@ def create_tag(tag, commit):
         "type": "commit"
     }
     r = requests.post(url, json=payload, headers=headers)
+    print(r.json())
     return r.json()['sha']
 
 def create_tag_ref(tag, tag_sha):
