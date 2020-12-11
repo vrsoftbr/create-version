@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v2.1.2
+
+- Fixed path to run create_tag.py
+
+
 ## v2.1.1
 
 - Fixed version file.
