@@ -69,4 +69,4 @@ git push origin $BRANCH
 
 pip3 install requests
  
-python3 create_tag.py -t $NEW_TAG -c $COMMIT
+python3 /create_tag.py -t $NEW_TAG -c $COMMIT
