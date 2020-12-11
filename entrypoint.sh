@@ -7,7 +7,7 @@ JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 
 BRANCH=$(git branch --show-current)
 CHANGELOG="CHANGELOG.md"
-TEMP_FILE="/tmp/log"
+export TEMP_FILE="/tmp/log"
 
 # Sets git username and email
 sh -c "git config --global user.name '${GITHUB_ACTOR}' \
@@ -64,29 +64,11 @@ git commit -a -m "$COMMIT_MESSAGE"
 
 COMMIT=$(git log --format="%H" -n 1)
 
-git show --pretty=fuller $COMMIT
-
 #Push recently created commit
 git push origin $BRANCH
 
-COMMIT=$(git log --format="%H" -n 1)
+cat $TEMP_FILE | sed 's/\"/\\\"/g' > $TEMP_FILE
 
-TAG_MESSAGE="$(cat $TEMP_FILE | sed 's/\"/\\\"/g')"
-
-echo "TAG MESSAGE $TAG_MESSAGE"
-OUT=$(curl \
-  -X POST \
-  -H 'authorization: Bearer '"$TOKEN" \
-  -H "Accept: application/vnd.github.v3+json" \
-  https://api.github.com/repos/$GITHUB_REPOSITORY/git/tags \
-  --data-raw '{"tag":"'"$NEW_TAG"'","message":"'"${TAG_MESSAGE//$'\n'/'\n'}"'","object":"'"$COMMIT"'","type":"commit"}')
-
-TAG_SHA=$(echo $OUT | python3 -c "import sys, json; print(json.load(sys.stdin)['sha'])")
-
-curl \
-  -X POST \
-  -H 'authorization: Bearer '"$TOKEN" \
-  -H "Accept: application/vnd.github.v3+json" \
-  https://api.github.com/repos/$GITHUB_REPOSITORY/git/refs \
-  -d '{"ref":"refs/tags/'"$NEW_TAG"'","sha":"'"${TAG_SHA}"'"}'
-
+pip install requests
+ 
+python3 create_tag.py -t $NEW_TAG -c $COMMIT

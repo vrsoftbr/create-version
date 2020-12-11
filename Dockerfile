@@ -10,8 +10,11 @@ RUN apk add --no-cache \
     git \
     bash \
     curl \
-    python3
+    python3 \
+    py3-pip
 
+COPY create_tag.py /create_tag.py
 COPY entrypoint.sh /entrypoint.sh
+
 
 ENTRYPOINT ["/entrypoint.sh"]
