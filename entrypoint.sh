@@ -36,9 +36,9 @@ fi
 
 
 if [ $COMMIT_COUNT -gt 0 ]; then
-  echo "Branch $BRANCH have $COMMIT_COUNT new commits"
+  echo "Branch $BRANCH has $COMMIT_COUNT new commits"
 else 
-  echo "Branch $BRANCH don't have new commits"
+  echo "Branch $BRANCH doesn't have new commits"
   exit 0
 fi
 
