@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v2.1.4
+
+- Update entrypoint.sh
+
 ## v2.1.3
 
 - Update entrypoint.sh
