@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.0.28
+
+- Update entrypoint.sh
+
 ## v1.0.27
 
 - Fixed workflow to run only on push to branches
