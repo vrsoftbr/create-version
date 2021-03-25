@@ -28,10 +28,10 @@ COMMIT_COUNT=0
 
 if [ "$LAST_TAG" == "-1" ]; then
     COMMIT_COUNT=1
-    git log --format="- %B" --no-merges > $TEMP_FILE
+    (git log --format="- %B" --no-merges | tr '"' ' ') > $TEMP_FILE
 else
     COMMIT_COUNT=$(git rev-list $LAST_TAG..HEAD --count)
-    git log --format="- %B" $LAST_TAG... --no-merges > $TEMP_FILE
+    (git log --format="- %B" $LAST_TAG... --no-merges | tr '"' ' ') >  $TEMP_FILE
 fi
 
 
