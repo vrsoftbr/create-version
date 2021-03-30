@@ -2,7 +2,7 @@
 name: 'Create Version'
 description: 'Creates a tag version and adds changes to changelog'
 inputs:
-  path:
+  directory:
     description: 'Path to execute the action'
     required: false
   script:  
