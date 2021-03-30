@@ -5,7 +5,9 @@ set -euxo pipefail
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 
-cd "$PATH"
+if ![ -z "$PATH" ]; then
+      cd "$PATH"
+fi
 
 BRANCH=$(git branch --show-current)
 CHANGELOG="CHANGELOG.md"
