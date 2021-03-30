@@ -5,7 +5,7 @@ set -euxo pipefail
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 
-if ![ -z "$PATH" ]; then
+if ! [ -z "$PATH" ]; then
       cd "$PATH"
 fi
 
