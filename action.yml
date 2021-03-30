@@ -2,6 +2,9 @@
 name: 'Create Version'
 description: 'Creates a tag version and adds changes to changelog'
 inputs:
+  path:
+    description: 'Path to execute the action'
+    required: false
   script:  
     description: 'Script that will increase version number and update version file'
     required: true 
