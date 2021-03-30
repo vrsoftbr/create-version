@@ -13,6 +13,8 @@ This action create/update the CHANGELOG.md file based on the last chages, commit
     fetch-depth: ''
 - uses: vrsoftbr/create-version@v2
   with:
+    # Path to excecute the action
+    path: ''
     # Path to a script (with arguments), that returns the next version. This return will be used to create the tag.
     # For example: './build.sh'.
     script: ''
