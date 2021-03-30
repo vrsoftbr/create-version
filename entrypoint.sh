@@ -25,7 +25,7 @@ NEW_TAG=$(bash -c "$SCRIPT")
 echo "NEW TAG $NEW_TAG"
 
 #Getting tags and commit messages from repo
-LAST_TAG="$(git describe --abbrev=0 || echo "-1")"
+LAST_TAG="$(git describe --tags --abbrev=0 || echo "-1")"
 echo "Last generated tag -> $LAST_TAG"
 
 COMMIT_COUNT=0
