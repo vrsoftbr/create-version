@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v2.1.6
+
+- Update entrypoint.sh
+- New Version: v2.1.5
+
+
 ## v2.1.5
 
 - Update action.yml
