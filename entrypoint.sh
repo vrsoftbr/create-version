@@ -5,8 +5,8 @@ set -euxo pipefail
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 
-if ! [ -z "$PATH" ]; then
-      cd "$PATH"
+if ! [ -z "$DIRECTORY" ]; then
+      cd "$DIRECTORY"
 fi
 
 BRANCH=$(git branch --show-current)
