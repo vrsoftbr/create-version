@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## v2.1.11
+
+- Update entrypoint.sh
+- New Version: v2.1.10
+
+- Update create_tag.py
+- New Version: v2.1.9
+
+- Update entrypoint.sh
+- New Version: v2.1.8
+
+- Mudança repo
+- New Version: v2.1.7
+
+- Update create_tag.py
+
 ## v2.1.10
 
 - Update create_tag.py
