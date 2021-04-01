@@ -74,7 +74,7 @@ git push origin $BRANCH
 pip3 install requests
 
 if [ "$DIRECTORY" != ''s ]; then
-    python3 /create_tag.py -t $NEW_TAG -c $COMMIT - r "vrsoftbr/$DIRECTORY"
+    python3 /create_tag.py -t $NEW_TAG -c $COMMIT -r "vrsoftbr/$DIRECTORY"
 else 
-    python3 /create_tag.py -t $NEW_TAG -c $COMMIT - r $GITHUB_REPOSITORY
+    python3 /create_tag.py -t $NEW_TAG -c $COMMIT -r $GITHUB_REPOSITORY
 fi
