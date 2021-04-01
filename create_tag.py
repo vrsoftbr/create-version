@@ -29,6 +29,8 @@ def main(argv):
 
 def create_tag(tag, commit, repo):
     url = "https://api.github.com/repos/" + repo + "/git/tags"
+    print(url)
+    
     commit_messages = ''
     with open(os.getenv('TEMP_FILE'), 'r') as file:
         commit_messages = file.read().replace("\"", "\\\"")
@@ -46,11 +48,12 @@ def create_tag(tag, commit, repo):
 
 def create_tag_ref(tag, tag_sha, repo):
     url = "https://api.github.com/repos/" + repo + "/git/refs"
+    print(url)
     payload = {
         "ref": "refs/tags/" + tag,
         "sha": tag_sha
     }
-
+    print(payload)
     requests.post(url, json=payload, headers=headers)
 
 if __name__ == "__main__":
