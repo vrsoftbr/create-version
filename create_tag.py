@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import sys, requests,  getopt, os;
 
-repo = os.getenv('GITHUB_REPOSITORY')
+repo = 'vrsoftbr/" + os.getenv('DIRECTORY')
 headers = {
     'Authorization' : "Bearer " + os.getenv('TOKEN'), 
     'Accept' : 'application/vnd.github.v3+json', 
