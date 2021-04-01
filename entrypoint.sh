@@ -72,5 +72,9 @@ COMMIT=$(git log --format="%H" -n 1)
 git push origin $BRANCH
 
 pip3 install requests
- 
-python3 /create_tag.py -t $NEW_TAG -c $COMMIT
+
+if ! [ -z "$DIRECTORY" ]; then
+    python3 /create_tag.py -t $NEW_TAG -c $COMMIT - r "vrsoftbr/$DIRECTORY"
+else 
+    python3 /create_tag.py -t $NEW_TAG -c $COMMIT - r $GITHUB_REPOSITORY
+fi
