@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v2.1.7
+
+- Update create_tag.py
+
 ## v2.1.6
 
 - Update entrypoint.sh
