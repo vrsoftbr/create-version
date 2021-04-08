@@ -2,6 +2,9 @@
 name: 'Create Version'
 description: 'Creates a tag version and adds changes to changelog'
 inputs:
+  force:
+    description: 'Force the version creation even has no commits'
+    required: false
   directory:
     description: 'Path to execute the action'
     required: false
