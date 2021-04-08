@@ -38,31 +38,36 @@ else
     (git log --format="- %B" $LAST_TAG... --no-merges | tr '"' ' ') >  $TEMP_FILE
 fi
 
+if [ "$FORCE" == "true" ]; then
+    echo "Forced creation, ignoring commit count"
+    echo "::set-output name=has_commit::force"
+else
+    if [ $COMMIT_COUNT -gt 0 ]; then
+        echo "Branch $BRANCH has $COMMIT_COUNT new commits"
+        echo "::set-output name=has_commit::true"
+    else 
+        echo "Branch $BRANCH doesn't have new commits"
+        echo "::set-output name=has_commit::false"
+        exit 0
+    fi
 
-if [ $COMMIT_COUNT -gt 0 ]; then
-  echo "Branch $BRANCH has $COMMIT_COUNT new commits"
-else 
-  echo "Branch $BRANCH doesn't have new commits"
-  exit 0
+    #Creates CHANGELOG.md file if it doesn't exists
+    if [ ! -f "$CHANGELOG" ]; then
+        echo "Creating CHANGELOG.md"
+        touch "$CHANGELOG" && git add $CHANGELOG
+
+        echo -e "# CHANGELOG\n\n" > $CHANGELOG
+    fi
+
+    #Update changelog file with the new version and commit messages
+    sed -i "3s/^/## $NEW_TAG\n\n\n/" CHANGELOG.md
+    sed -i "4r $TEMP_FILE" CHANGELOG.md
+
 fi
-
-
-#Creates CHANGELOG.md file if it doesn't exists
-if [ ! -f "$CHANGELOG" ]; then
-    echo "Creating CHANGELOG.md"
-    touch "$CHANGELOG" && git add $CHANGELOG
-
-    echo -e "# CHANGELOG\n\n" > $CHANGELOG
-fi
-
-#Update changelog file with the new version and commit messages
-sed -i "3s/^/## $NEW_TAG\n\n\n/" CHANGELOG.md
-sed -i "4r $TEMP_FILE" CHANGELOG.md
 
 #Add changed files and/or untrancked ones and make the commit
 COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | sed "s/:new_version/$NEW_TAG/")
 COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | sed "s/:last_version/$LAST_TAG/")
-
 
 git commit -a -m "$COMMIT_MESSAGE"
 

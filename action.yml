@@ -18,6 +18,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   env:
+    FORCE: ${{ inputs.force }}
     DIRECTORY: ${{ inputs.directory }}
     SCRIPT: ${{ inputs.script }}
     COMMIT_MESSAGE: ${{ inputs.commit_message }}
