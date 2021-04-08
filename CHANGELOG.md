@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v2.1.15
+
+- added FORCE option to create version ignoring commit count in action.yml inputs
+
+
 ## v2.1.14
 
 - added FORCE option to create version ignoring commit count, and added output to check if have new commits outside the action
